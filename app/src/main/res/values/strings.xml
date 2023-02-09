@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Kiwis Cookies and Cakes</string>
+    <string name="logintextTitle">Log-In</string>
+    <string name="usernameTextTitle">Username:</string>
+    <string name="passwordTextTitle">Password:</string>
+    <string name="re_enterPassword">Re-Enter Password:</string>
+    <string name="textViewOr">Or</string>
+    <string name="signinTextTitle">Sign-In</string>
+    <string name="createaccountButtonText">Create an account</string>
+    <string name="createaccountTitle">Create Account</string>
+</resources>
