@@ -50,6 +50,7 @@
         android:layout_height="67dp"
         android:layout_marginTop="84dp"
         android:text="@string/removeUserButton"
+        android:textColor="#FF0808"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/removeUserEditText" />

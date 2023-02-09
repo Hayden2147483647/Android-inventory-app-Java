@@ -95,6 +95,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="296dp"
         android:text="@string/createaccountTitle"
+        android:textColor="#40E847"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
