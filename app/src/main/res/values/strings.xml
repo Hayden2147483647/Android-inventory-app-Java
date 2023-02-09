@@ -31,4 +31,18 @@
     <string name="itemtext">Item:</string>
     <string name="quantitytext">Quantity:</string>
     <string name="typetext">Type:</string>
+
+    <string name="biscuit">Biscuit</string>
+    <string name="cookie">Cookie</string>
+    <string name="cake">Cake</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="other">Other</string>
+
+    <string name="addUsersButton">Add Users</string>
+    <string name="addUserButton">Add User</string>
+    <string name="viewUsersButton">View Users</string>
+    <string name="removeUsersButton">Remove Users</string>
+    <string name="removeUserButton">Remove User</string>
+
+    <string name="viewUsersTitle">Users</string>
 </resources>

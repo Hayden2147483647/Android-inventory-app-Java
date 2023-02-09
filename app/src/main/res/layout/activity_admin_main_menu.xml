@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin_Main_Menu">
+
+    <TextView
+        android:id="@+id/adminMainMenuTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/main_menuTitle"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addUsersButton"
+        android:layout_width="148dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/addUsersButton"
+        app:layout_constraintBaseline_toBaselineOf="@+id/viewUsersButton"
+        app:layout_constraintEnd_toStartOf="@+id/viewUsersButton"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/viewUsersButton"
+        android:layout_width="148dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:text="@string/viewUsersButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/removeUsersButton"
+        android:layout_width="337dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="192dp"
+        android:text="@string/removeUsersButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminMainMenuTitle" />
+
+    <Button
+        android:id="@+id/invStatFromAdminMenu"
+        android:layout_width="337dp"
+        android:layout_height="66dp"
+        android:text="@string/inventoryStatusTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/removeUsersButton"
+        app:layout_constraintVertical_bias="0.101" />
+
+    <Button
+        android:id="@+id/logoutFromAdminMenu"
+        android:layout_width="166dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/logoutTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invStatFromAdminMenu" />
+</androidx.constraintlayout.widget.ConstraintLayout>

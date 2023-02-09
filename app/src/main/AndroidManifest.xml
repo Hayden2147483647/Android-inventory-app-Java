@@ -12,6 +12,18 @@
         android:theme="@style/Theme.KiwisCookiesAndCakes"
         tools:targetApi="31">
         <activity
+            android:name=".Admin_Remove_Users"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_View_Users"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_Add_Users"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_Main_Menu"
+            android:exported="false" />
+        <activity
             android:name=".Add_Item"
             android:exported="false" />
         <activity
