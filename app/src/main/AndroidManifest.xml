@@ -12,11 +12,21 @@
         android:theme="@style/Theme.KiwisCookiesAndCakes"
         tools:targetApi="31">
         <activity
+            android:name=".Add_Item"
+            android:exported="false" />
+        <activity
+            android:name=".inventory_status"
+            android:exported="false" />
+        <activity
+            android:name=".main_menu"
+            android:exported="false" />
+        <activity
             android:name=".createaccount"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

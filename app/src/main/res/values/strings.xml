@@ -1,11 +1,34 @@
 <resources>
     <string name="app_name">Kiwis Cookies and Cakes</string>
     <string name="logintextTitle">Log-In</string>
+    <string name="logoutTitle">Log-Out</string>
+    <string name="cancel">Cancel</string>
     <string name="usernameTextTitle">Username:</string>
     <string name="passwordTextTitle">Password:</string>
     <string name="re_enterPassword">Re-Enter Password:</string>
     <string name="textViewOr">Or</string>
     <string name="signinTextTitle">Sign-In</string>
+
     <string name="createaccountButtonText">Create an account</string>
     <string name="createaccountTitle">Create Account</string>
+    <string name="main_menuTitle">Main-Menu</string>
+
+    <string name="addItemsbutton">Add Items into Inventory</string>
+
+    <string name="inventoryStatusTitle">Inventory Status</string>
+
+    <string name="clearInventoryButton">Clear all in Inventory</string>
+
+    <string name="add20ItemsButton">Add 20 Test items to Inventory</string>
+
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+
+    <string name="backToMainMenu">Back to Main Menu</string>
+
+    <string name="additemMenuTitle">Add Item</string>
+
+    <string name="itemtext">Item:</string>
+    <string name="quantitytext">Quantity:</string>
+    <string name="typetext">Type:</string>
 </resources>
