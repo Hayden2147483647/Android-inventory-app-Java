@@ -24,6 +24,32 @@ public class Admin_View_Users extends AppCompatActivity {
 
         //Button to return to admin main menu
         Button adminMainMenu = findViewById(R.id.mainMenuFromViewUsers);
+        //Button to go to Add Users
+        Button addUsersNavButton = findViewById(R.id.addUserFromViewUsers);
+        //Button to go to Remove Users
+        Button removeUsersNavButton = findViewById(R.id.removeUsersFromViewUsers);
+
+        //Navigate to Add User
+        addUsersNavButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent addUsersNav = new Intent(getApplicationContext(), Admin_Add_Users.class);
+                startActivity(addUsersNav);
+            }
+        });
+
+        //Navigate to Remove Users
+        removeUsersNavButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent removeUsersNav = new Intent(getApplicationContext(), Admin_Remove_Users.class);
+                startActivity(removeUsersNav);
+            }
+        });
 
         //Return to Admin main menu
         adminMainMenu.setOnClickListener(new View.OnClickListener()

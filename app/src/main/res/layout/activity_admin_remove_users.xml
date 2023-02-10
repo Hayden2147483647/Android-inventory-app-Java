@@ -59,8 +59,18 @@
         android:id="@+id/mainMenuFromRemoveUser"
         android:layout_width="226dp"
         android:layout_height="67dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         android:text="@string/backToMainMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/removeUserButton" />
+
+    <Button
+        android:id="@+id/viewUsersFromRemoveUsers"
+        android:layout_width="226dp"
+        android:layout_height="67dp"
+        android:text="@string/viewUsersButton"
+        app:layout_constraintBottom_toTopOf="@+id/mainMenuFromRemoveUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/removeUserButton" />

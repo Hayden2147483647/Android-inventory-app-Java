@@ -24,6 +24,8 @@ public class Admin_Add_Users extends AppCompatActivity {
         Button addUserButton = findViewById(R.id.addUserButton);
         //Button to go back to Admin main menu
         Button adminMainMenuButton = findViewById(R.id.mainMenuFromAddUser);
+        //Button to go to the view users page
+        Button viewUsersButton = findViewById(R.id.viewUsersFromAddUser);
 
         //Add user while checking inputs are suffice
         addUserButton.setOnClickListener(new View.OnClickListener()
@@ -33,6 +35,17 @@ public class Admin_Add_Users extends AppCompatActivity {
             {
                 //TODO add in check from input
                 //TODO add in Toast or pop-up for if input is empty of username exists
+            }
+        });
+
+        //Navigate to View Users
+        viewUsersButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent viewUsers = new Intent(getApplicationContext(), Admin_View_Users.class);
+                startActivity(viewUsers);
             }
         });
 

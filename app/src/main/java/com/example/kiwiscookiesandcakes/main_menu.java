@@ -2,12 +2,14 @@ package com.example.kiwiscookiesandcakes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.kiwiscookiesandcakes.MainActivity.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class main_menu extends AppCompatActivity {
+public class main_menu<isAdmin> extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +27,26 @@ public class main_menu extends AppCompatActivity {
         Button clearInvButton = findViewById(R.id.clearInventoryButton);
         //Button to add 20 test items into inventory
         Button addTestItemsButton = findViewById(R.id.addTestItemButton);
+        //Button for if user is admin
+        Button isAdminButton = findViewById(R.id.isAdminButton);
+        //check to see if button is visible or not
+
+        if (isAdmin == false)
+        {
+            isAdminButton.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            isAdminButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent toAdmin = new Intent(getApplicationContext(), Admin_Main_Menu.class);
+                    startActivity(toAdmin);
+                }
+            });
+        }
 
         //Add Items navigation Button
         addItemsButton.setOnClickListener(new View.OnClickListener()

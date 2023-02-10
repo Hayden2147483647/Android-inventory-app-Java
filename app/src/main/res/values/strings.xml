@@ -45,4 +45,6 @@
     <string name="removeUserButton">Remove User</string>
 
     <string name="viewUsersTitle">Users</string>
+
+    <string name="adminmenu">Admin Menu</string>
 </resources>

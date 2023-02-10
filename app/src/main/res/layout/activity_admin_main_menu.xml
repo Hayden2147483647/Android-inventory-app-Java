@@ -23,8 +23,8 @@
         android:id="@+id/addUsersButton"
         android:layout_width="148dp"
         android:layout_height="84dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/addUsersButton"
@@ -38,9 +38,9 @@
         android:id="@+id/viewUsersButton"
         android:layout_width="148dp"
         android:layout_height="84dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:text="@string/viewUsersButton"
         android:textColor="#69E5F4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,27 +48,27 @@
 
     <Button
         android:id="@+id/removeUsersButton"
-        android:layout_width="337dp"
+        android:layout_width="313dp"
         android:layout_height="66dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="144dp"
         android:text="@string/removeUsersButton"
         android:textColor="#FA3A3A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminMainMenuTitle" />
 
     <Button
         android:id="@+id/invStatFromAdminMenu"
-        android:layout_width="337dp"
+        android:layout_width="313dp"
         android:layout_height="66dp"
         android:text="@string/inventoryStatusTitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/removeUsersButton"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintVertical_bias="0.094" />
 
     <Button
         android:id="@+id/logoutFromAdminMenu"
