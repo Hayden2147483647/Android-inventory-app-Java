@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity
 
     //Boolean for if user is admin
     public static Boolean isAdmin = false;
+
+    //Hashmap data structure for user logins
+    public static HashMap<String, String> userLog = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,49 +45,80 @@ public class MainActivity extends AppCompatActivity
         //Button to sign in
         final Button signinButton = findViewById(R.id.signinButton);
 
-        //array for storing usernames and passwords for logging in
-        String[] usernames = new String[100];
-        String[] passwords = new String[100];
-
-            do
-            {
-                //TODO add in data structure for logins(e.g. arrays, linked list, Hashmap). NOTE not from file
-            }
-            while ();//TODO fix loop so it reads all contents
-
-
         //sign in verification
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                for (int x = 0; x < passwords.length; x++) {
-                    String userString = usernames[x];
-                    String passString = passwords[x];
-                    if (usernameInput.getText().toString().equals(userString) && passwordInput.getText().toString().equals(passString)) {
-                        Intent userSignIn = new Intent(getApplicationContext(), main_menu.class);
-                        startActivity(userSignIn);
-                        isAdmin = false;
-                        break;
-                    } else if (usernameInput.getText().toString().equals("Admin") && passwordInput.getText().toString().equals("CookieManagement84")) {
-                        Intent adminSignIn = new Intent(getApplicationContext(), Admin_Main_Menu.class);
-                        startActivity(adminSignIn);
-                        isAdmin = true;
-                        break;
-                    } else if (usernameInput.length() == 0 || passwordInput.length() == 0) {
-                        Inputempty();
-                        break;
-                    } else {
-                        //pop up for if both inputs are not blank and isn't a user login
-                        Toast.makeText(getBaseContext(), "Username and Password is not a login.\nIf you have forgotten you login, please contact the customer support team\nElse, create a new account", Toast.LENGTH_LONG).show();
-                        break;
+            public void onClick(View v)
+            {
+                while (!userLog.entrySet().isEmpty())
+                {
+                    for (String x : userLog.keySet())
+                    {
+                        String userString = x;
+                        String passString = userLog.get(x);
+                        //Username and password matches up with the hashmap values and logs user in
+                        if (usernameInput.getText().toString().equals(userString) && passwordInput.getText().toString().equals(passString))
+                        {
+                            Intent userSignIn = new Intent(getApplicationContext(), main_menu.class);
+                            startActivity(userSignIn);
+                            isAdmin = false;
+                            break;
+                        }
+                        //Username and password match admin login details and takes the user to the admin page
+                        else if (usernameInput.getText().toString().equals("Admin") && passwordInput.getText().toString().equals("CookieManagement84"))
+                        {
+                            Intent adminSignIn = new Intent(getApplicationContext(), Admin_Main_Menu.class);
+                            startActivity(adminSignIn);
+                            isAdmin = true;
+                            break;
+                        }
+                        //If either text field is left blank shows up with and appropriate message
+                        else if (usernameInput.length() == 0 || passwordInput.length() == 0)
+                         {
+                            //Calls the pop up message method from down below
+                            Inputempty();
+                            break;
+                        }
+                        else
+                        {
+                            //pop up for if both inputs are not blank and isn't a user login
+                            Toast.makeText(getBaseContext(), "Username and Password is not a login.\nIf you have forgotten you login, please contact the customer support team\nElse, create a new account", Toast.LENGTH_LONG).show();
+                            //Clears inputs
+                            usernameInput.setText("");
+                            passwordInput.setText("");
+                            break;
+                        }
                     }
+                    break;
+                }
+                //Username and password match admin login details and takes the user to the admin page
+                if (usernameInput.getText().toString().equals("Admin") && passwordInput.getText().toString().equals("CookieManagement84"))
+                {
+                    Intent adminSignIn = new Intent(getApplicationContext(), Admin_Main_Menu.class);
+                    startActivity(adminSignIn);
+                    isAdmin = true;
+                }
+                //If either text field is left blank shows up with and appropriate message
+                else if (usernameInput.length() == 0 || passwordInput.length() == 0)
+                {
+                //Calls the pop up message method from down below
+                Inputempty();
+                }
+                else
+                {
+                    //pop up for if both inputs are not blank and isn't a user login
+                    Toast.makeText(getBaseContext(), "Username and Password is not a login.\nIf you have forgotten you login, please contact the customer support team\nElse, create a new account", Toast.LENGTH_LONG).show();
+                    //Clears inputs
+                    usernameInput.setText("");
+                    passwordInput.setText("");
                 }
             }
         });
 
         createAccountNavigationButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent createAcc = new Intent(getApplicationContext(), createaccount.class);
                 startActivity(createAcc);
             }
@@ -100,7 +134,8 @@ public class MainActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage("Please make sure both inputs are filled in").setTitle("Empty field");
 
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
@@ -108,7 +143,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
@@ -118,5 +154,7 @@ public class MainActivity extends AppCompatActivity
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
 
 }

@@ -26,7 +26,6 @@
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="96dp"
-        android:text="Username:\n\nPassword:"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +38,6 @@
         android:layout_marginLeft="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
-        android:text="Johndoe\n\nJohnlikescookies"
         android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/usernamePasswordTextTitle"
         app:layout_constraintEnd_toEndOf="parent"

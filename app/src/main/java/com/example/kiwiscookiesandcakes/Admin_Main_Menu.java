@@ -19,7 +19,7 @@ public class Admin_Main_Menu extends AppCompatActivity {
         Button addUserButton = findViewById(R.id.addUsersButton);
         Button viewUsersButton = findViewById(R.id.viewUsersButton);
         Button removeUsersButton = findViewById(R.id.removeUsersButton);
-        Button invStatButton = findViewById(R.id.invStatFromAdminMenu);
+        Button toUsermenuButton = findViewById(R.id.userMenuFromAdminMenu);
         Button logoutButton = findViewById(R.id.logoutFromAdminMenu);
 
         //Add user navigation
@@ -56,13 +56,13 @@ public class Admin_Main_Menu extends AppCompatActivity {
         });
 
         //inventory status navigation
-        invStatButton.setOnClickListener(new View.OnClickListener()
+        toUsermenuButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Intent invStat = new Intent(getApplicationContext(), inventory_status.class);
-                startActivity(invStat);
+                Intent userMenu = new Intent(getApplicationContext(), main_menu.class);
+                startActivity(userMenu);
             }
         });
 

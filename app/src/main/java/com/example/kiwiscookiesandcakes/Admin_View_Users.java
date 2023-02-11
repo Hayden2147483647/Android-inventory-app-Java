@@ -1,14 +1,14 @@
 package com.example.kiwiscookiesandcakes;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.kiwiscookiesandcakes.MainActivity.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Admin_View_Users extends AppCompatActivity {
+public class Admin_View_Users<userLog> extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,7 +20,26 @@ public class Admin_View_Users extends AppCompatActivity {
         TextView userpassTitle = findViewById(R.id.usernamePasswordTextTitle);
         TextView userpassDisplay = findViewById(R.id.usernamesPasswordsDisplay);
 
-        //TODO add in how the it will displayed
+        //Strings for setting the information from the users login hashmap
+        String userTitle = "";
+        String userDisplay = "";
+
+        if (!MainActivity.userLog.entrySet().isEmpty())
+        {
+            for (String s : MainActivity.userLog.keySet())
+            {
+                userTitle += "Username:\n\nPassword:\n\n";
+                userDisplay += s + "\n\n" + MainActivity.userLog.get(s) + "\n\n";
+            }
+            userpassTitle.setText(userTitle);
+            userpassDisplay.setText(userDisplay);
+        }
+        else
+        {
+            userpassTitle.setText("");
+            userpassDisplay.setText("");
+        }
+
 
         //Button to return to admin main menu
         Button adminMainMenu = findViewById(R.id.mainMenuFromViewUsers);

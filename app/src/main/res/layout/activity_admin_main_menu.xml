@@ -59,10 +59,10 @@
         app:layout_constraintTop_toBottomOf="@+id/adminMainMenuTitle" />
 
     <Button
-        android:id="@+id/invStatFromAdminMenu"
+        android:id="@+id/userMenuFromAdminMenu"
         android:layout_width="313dp"
         android:layout_height="66dp"
-        android:text="@string/inventoryStatusTitle"
+        android:text="@string/touserMenu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
@@ -79,5 +79,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invStatFromAdminMenu" />
+        app:layout_constraintTop_toBottomOf="@+id/userMenuFromAdminMenu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

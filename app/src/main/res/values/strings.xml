@@ -47,4 +47,6 @@
     <string name="viewUsersTitle">Users</string>
 
     <string name="adminmenu">Admin Menu</string>
+
+    <string name="touserMenu">Users Menu</string>
 </resources>

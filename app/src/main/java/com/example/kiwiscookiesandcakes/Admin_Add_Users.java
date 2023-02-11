@@ -1,14 +1,18 @@
 package com.example.kiwiscookiesandcakes;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.kiwiscookiesandcakes.MainActivity.*;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class Admin_Add_Users extends AppCompatActivity {
+public class Admin_Add_Users<userLog> extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,8 +37,47 @@ public class Admin_Add_Users extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                //TODO add in check from input
-                //TODO add in Toast or pop-up for if input is empty of username exists
+                String userString = usernameInput.getText().toString();
+                String passString = passwordInput.getText().toString();
+                while (!MainActivity.userLog.entrySet().isEmpty())
+                {
+                    //Checking that inputs are not blank
+                    if (usernameInput.length() == 0 || passwordInput.length() == 0)
+                    {
+                        Toast.makeText(getBaseContext(), "Please make sure all the text field are not blank", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    //Checks if users is already in Hashmap
+                    else if (MainActivity.userLog.containsKey(usernameInput.getText().toString()))
+                    {
+                        //Calls method of popup screen
+                        userExists();
+                        break;
+                    }
+                    //Success
+                    else
+                    {
+                        MainActivity.userLog.put(userString, passString);
+                        //Calls method of popup screen for success
+                        newUserSuccess();
+                        break;
+                    }
+                }
+                //Checking that inputs are not blank
+                if (usernameInput.length() == 0 || passwordInput.length() == 0)
+                {
+                    Toast.makeText(getBaseContext(), "Please make sure all the text field are not blank", Toast.LENGTH_SHORT).show();
+                }
+                //Success
+                else
+                {
+                    MainActivity.userLog.put(userString, passString);
+                    //Calls method of popup screen for success
+                    newUserSuccess();
+                    //Clears inputs
+                    usernameInput.setText("");
+                    passwordInput.setText("");
+                }
             }
         });
 
@@ -59,5 +102,39 @@ public class Admin_Add_Users extends AppCompatActivity {
                 startActivity(adminmenu);
             }
         });
+    }
+
+    private void newUserSuccess()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Admin_Add_Users.this);
+        builder.setMessage("User added Successfully");
+
+        builder.setPositiveButton("Dismiss", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void userExists()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Admin_Add_Users.this);
+        builder.setMessage("user already exists");
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
