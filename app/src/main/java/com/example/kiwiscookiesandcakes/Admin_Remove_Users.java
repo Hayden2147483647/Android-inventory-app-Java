@@ -2,6 +2,8 @@ package com.example.kiwiscookiesandcakes;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import com.example.kiwiscookiesandcakes.MainActivity.*;
 
 import android.content.DialogInterface;
@@ -12,16 +14,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class Admin_Remove_Users<userLog> extends AppCompatActivity {
 
-    //String to be used to store the
+    //String to be used to store the name of the user
     private String userstringRemove;
+
+    //Userlogin database
+    public static UserLogins userLogins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_remove_users);
+
+        //Initialise the database
+        userLogins = Room.databaseBuilder(getApplicationContext(), UserLogins.class, "userloginsdb").allowMainThreadQueries().build();
+
+        //List to get all the users from the database
+        List<Users> allUsers = userLogins.usersDao().getAllUsers();
+        for (Users user : allUsers)
+        {
+            MainActivity.userLog.put(user.getUsername(), user.getPassword());
+        }
 
         //edit text for what users to delete
         EditText removeUserInput = findViewById(R.id.removeUserEditText);
@@ -55,15 +72,20 @@ public class Admin_Remove_Users<userLog> extends AppCompatActivity {
                     for (String s : MainActivity.userLog.keySet())
                     {
                         userstringRemove = removeUserInput.getText().toString();
-                        if (!removeUserInput.getText().toString().equals(s))
-                        {
-                            //Alert for if user is not in database
-                            userNonExist();
-                        }
-                        else
+                        if (removeUserInput.getText().toString().equals(s))
                         {
                             //Alert for confirmation
                             removeConfirm();
+                            break;
+                        }
+                        else if (!removeUserInput.getText().toString().equals(s))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            //Alert for if user is not in database
+                            userNonExist();
                         }
                     }
 
@@ -105,6 +127,8 @@ public class Admin_Remove_Users<userLog> extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which)
             {
                 MainActivity.userLog.remove(userstringRemove);
+                //Delete user by username through the database
+                userLogins.usersDao().deleteByUsername(userstringRemove);
                 Toast.makeText(getBaseContext(), "User removed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -125,7 +149,7 @@ public class Admin_Remove_Users<userLog> extends AppCompatActivity {
     private void userNonExist()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(Admin_Remove_Users.this);
-        builder.setMessage("User does not exist").setTitle("Does not exist");
+        builder.setMessage("User does not exist");
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
         {

@@ -2,6 +2,8 @@ package com.example.kiwiscookiesandcakes;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import com.example.kiwiscookiesandcakes.MainActivity.*;
 
 import android.content.DialogInterface;
@@ -12,13 +14,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class Admin_Add_Users<userLog> extends AppCompatActivity {
+
+    //Userlogin database
+    public static UserLogins userLogins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_users);
+
+        //Initialise the database
+        userLogins = Room.databaseBuilder(getApplicationContext(), UserLogins.class, "userloginsdb").allowMainThreadQueries().build();
+
+        //List to get all the users from the database
+        List<Users> allUsers = userLogins.usersDao().getAllUsers();
+        for (Users user : allUsers)
+        {
+            MainActivity.userLog.put(user.getUsername(), user.getPassword());
+        }
+
+        //Creating new users object
+        Users newUser = new Users();
 
         //Edit text for input of username and password
         EditText usernameInput = findViewById(R.id.usernameEditTextAddUser);
@@ -39,45 +59,34 @@ public class Admin_Add_Users<userLog> extends AppCompatActivity {
             {
                 String userString = usernameInput.getText().toString();
                 String passString = passwordInput.getText().toString();
-                while (!MainActivity.userLog.entrySet().isEmpty())
-                {
+
                     //Checking that inputs are not blank
                     if (usernameInput.length() == 0 || passwordInput.length() == 0)
                     {
                         Toast.makeText(getBaseContext(), "Please make sure all the text field are not blank", Toast.LENGTH_SHORT).show();
-                        break;
                     }
                     //Checks if users is already in Hashmap
                     else if (MainActivity.userLog.containsKey(usernameInput.getText().toString()))
                     {
                         //Calls method of popup screen
                         userExists();
-                        break;
+                        passwordInput.setText("");
                     }
                     //Success
                     else
                     {
                         MainActivity.userLog.put(userString, passString);
+                        //setting user name and password to user object
+                        newUser.setUsername(userString);
+                        newUser.setPassword(passString);
+                        //Inserting user login detail into database
+                        userLogins.usersDao().addUser(newUser);
                         //Calls method of popup screen for success
                         newUserSuccess();
-                        break;
+                        //sets the text to blank to quickly input another if be
+                        usernameInput.setText("");
+                        passwordInput.setText("");
                     }
-                }
-                //Checking that inputs are not blank
-                if (usernameInput.length() == 0 || passwordInput.length() == 0)
-                {
-                    Toast.makeText(getBaseContext(), "Please make sure all the text field are not blank", Toast.LENGTH_SHORT).show();
-                }
-                //Success
-                else
-                {
-                    MainActivity.userLog.put(userString, passString);
-                    //Calls method of popup screen for success
-                    newUserSuccess();
-                    //Clears inputs
-                    usernameInput.setText("");
-                    passwordInput.setText("");
-                }
             }
         });
 
@@ -124,7 +133,7 @@ public class Admin_Add_Users<userLog> extends AppCompatActivity {
     private void userExists()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(Admin_Add_Users.this);
-        builder.setMessage("user already exists");
+        builder.setMessage("User already exists");
 
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
         {

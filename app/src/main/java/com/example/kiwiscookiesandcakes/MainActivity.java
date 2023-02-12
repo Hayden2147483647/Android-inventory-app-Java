@@ -2,6 +2,7 @@ package com.example.kiwiscookiesandcakes;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,21 +20,35 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
 {
+    //Userlogin database
+    public static UserLogins userLogins;
 
     //Boolean for if user is admin
     public static Boolean isAdmin = false;
 
     //Hashmap data structure for user logins
     public static HashMap<String, String> userLog = new HashMap<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Initialise the database
+        userLogins = Room.databaseBuilder(getApplicationContext(), UserLogins.class, "userloginsdb").allowMainThreadQueries().build();
+
+        //List to get all the users from the database
+        List<Users> allUsers = userLogins.usersDao().getAllUsers();
+        for (Users user : allUsers)
+        {
+            userLog.put(user.getUsername(), user.getPassword());
+        }
 
         //Edit texts for the username and password
         EditText usernameInput = findViewById(R.id.editTextUsernameLogin);
@@ -79,15 +94,6 @@ public class MainActivity extends AppCompatActivity
                             Inputempty();
                             break;
                         }
-                        else
-                        {
-                            //pop up for if both inputs are not blank and isn't a user login
-                            Toast.makeText(getBaseContext(), "Username and Password is not a login.\nIf you have forgotten you login, please contact the customer support team\nElse, create a new account", Toast.LENGTH_LONG).show();
-                            //Clears inputs
-                            usernameInput.setText("");
-                            passwordInput.setText("");
-                            break;
-                        }
                     }
                     break;
                 }
@@ -97,12 +103,6 @@ public class MainActivity extends AppCompatActivity
                     Intent adminSignIn = new Intent(getApplicationContext(), Admin_Main_Menu.class);
                     startActivity(adminSignIn);
                     isAdmin = true;
-                }
-                //If either text field is left blank shows up with and appropriate message
-                else if (usernameInput.length() == 0 || passwordInput.length() == 0)
-                {
-                //Calls the pop up message method from down below
-                Inputempty();
                 }
                 else
                 {

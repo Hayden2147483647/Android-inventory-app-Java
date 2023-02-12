@@ -2,6 +2,7 @@ package com.example.kiwiscookiesandcakes;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.kiwiscookiesandcakes.MainActivity.*;
 
@@ -14,17 +15,32 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class createaccount<userLog> extends AppCompatActivity
 {
-
+    //Userlogin database
+    public static UserLogins userLogins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createaccount);
+
+        //Initialise the database
+        userLogins = Room.databaseBuilder(getApplicationContext(), UserLogins.class, "userloginsdb").allowMainThreadQueries().build();
+
+        //List to get all the users from the database
+        List<Users> allUsers = userLogins.usersDao().getAllUsers();
+        for (Users user : allUsers)
+        {
+            MainActivity.userLog.put(user.getUsername(), user.getPassword());
+        }
+
+        //Creating new users object
+        Users newUser = new Users();
 
         //Edit texts for username, password, and re-enter password
         EditText usernameInput = findViewById(R.id.editTextUsernameCreateAcc);
@@ -46,59 +62,38 @@ public class createaccount<userLog> extends AppCompatActivity
             {
                 String userString = usernameInput.getText().toString();
                 String passString = passwordInput.getText().toString();
-                while (!MainActivity.userLog.entrySet().isEmpty())
-                {
                         //Checking that inputs are not blank
                         if (usernameInput.length() == 0 || passwordInput.length() == 0)
                         {
                             Toast.makeText(getBaseContext(), "Please make sure all the text field are not blank", Toast.LENGTH_SHORT).show();
-                            break;
                         }
                         //Checking that if re-enter password does not match with the password input
                         else if (!repasswordInput.getText().toString().equals(passwordInput.getText().toString()))
                         {
                             Toast.makeText(getBaseContext(), "Please make sure both password are entered in correctly", Toast.LENGTH_SHORT).show();
-                            break;
                         }
                         //Checks if users is already in Hashmap
                         else if (MainActivity.userLog.containsKey(usernameInput.getText().toString()))
                         {
                             //Calls method of popup screen
                             userExists();
-                            break;
                         }
                         //Success
                         else
                         {
                             MainActivity.userLog.put(userString, passString);
+                            //setting user name and password to user object
+                            newUser.setUsername(userString);
+                            newUser.setPassword(passString);
+                            //Inserting user login detail into database
+                            userLogins.usersDao().addUser(newUser);
                             //Calls method of popup screen for success
                             newUserSuccess();
-                            break;
+                            //Clears inputs
+                            usernameInput.setText("");
+                            passwordInput.setText("");
+                            repasswordInput.setText("");
                         }
-                }
-                //Checking that inputs are not blank
-                if (usernameInput.length() == 0 || passwordInput.length() == 0)
-                {
-                    Toast.makeText(getBaseContext(), "Please make sure all the text field are not blank", Toast.LENGTH_SHORT).show();
-                }
-                //Checking that if re-enter password does not match with the password input
-                else if (!repasswordInput.getText().toString().equals(passwordInput.getText().toString()))
-                {
-                    Toast.makeText(getBaseContext(), "Please make sure both password are entered in correctly", Toast.LENGTH_SHORT).show();
-                    //Clears re-enter password field
-                    repasswordInput.setText("");
-                }
-                //Success
-                else
-                {
-                    MainActivity.userLog.put(userString, passString);
-                    //Calls method of popup screen for success
-                    newUserSuccess();
-                    //Clears inputs
-                    usernameInput.setText("");
-                    passwordInput.setText("");
-                    repasswordInput.setText("");
-                }
             }
         });
 

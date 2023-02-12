@@ -1,6 +1,8 @@
 package com.example.kiwiscookiesandcakes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import com.example.kiwiscookiesandcakes.MainActivity.*;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +10,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class Admin_View_Users<userLog> extends AppCompatActivity {
+
+    //Userlogin database
+    public static UserLogins userLogins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_users);
+
+        //Initialise the database
+        userLogins = Room.databaseBuilder(getApplicationContext(), UserLogins.class, "userloginsdb").allowMainThreadQueries().build();
+
+        //List to get all the users from the database
+        List<Users> allUsers = userLogins.usersDao().getAllUsers();
+        for (Users user : allUsers)
+        {
+            MainActivity.userLog.put(user.getUsername(), user.getPassword());
+        }
 
         //Text views of username and passwords
         TextView userpassTitle = findViewById(R.id.usernamePasswordTextTitle);
