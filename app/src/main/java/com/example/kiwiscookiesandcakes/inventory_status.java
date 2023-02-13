@@ -71,7 +71,7 @@ public class inventory_status extends AppCompatActivity {
                     nextButton.setEnabled(false);
                     nextButton.setClickable(false);
                 }
-                //if array extends  % 5 then it should display the rest
+                //if array extends  % 5 then it should display the rest without an error
                 if (j >= itemNameArray.length)
                 {
                     labelString[0] += "\n\n\n\n";
@@ -89,8 +89,16 @@ public class inventory_status extends AppCompatActivity {
                 }
                 itemLabelView.setText(labelString[0]);
                 itemDisplayView.setText(displayString[0]);
-
             }
+
+            /*In Future having a page number view showing
+             *the current page number as well as the max page number
+             * would be beneficial
+             */
+
+            //In future maintenance, on the last page should have a plus button to take the user to the add items page
+
+            //Future Maintenance, making sure that when goes to the end of the inventory page
 
 
         //Previous Button
@@ -102,7 +110,7 @@ public class inventory_status extends AppCompatActivity {
                 //Resets the strings that will be used to set the textviews' text
                 labelString[0] = "";
                 displayString[0] = "";
-
+                //Decreases the page number
                 pageNum[0]--;
                 //Sets the next button to be enabled when previous has been pressed
                 nextButton.setEnabled(true);
@@ -155,7 +163,7 @@ public class inventory_status extends AppCompatActivity {
                 //Resets the strings that will be used to set the textviews' text
                 labelString[0] = "";
                 displayString[0] = "";
-
+                //increases the page number
                 pageNum[0]++;
                 for (int n = ((5*pageNum[0])-4); n <= (5 * pageNum[0]); n++)
                 {

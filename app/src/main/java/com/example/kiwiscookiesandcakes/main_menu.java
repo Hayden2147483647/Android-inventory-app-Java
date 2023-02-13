@@ -45,6 +45,7 @@ public class main_menu<isAdmin> extends AppCompatActivity {
         //New inventory class object for inserting an item
         Inventory testItems = new Inventory();
 
+        //In future maintenance, having a screen/button to modify items to save time and repeats into the database
 
         //arrays for storing test items name, quantity and type
         String[] itemArrayName = {"Chocolate", "Vanilla", "Biscoff", "Oreo", "Pipette", "Strawberry", "MarshMellow", "Icing", "Vanilla Essence", "Tea", "Coffee", "Milo", "Sugar", "Flour", "Eggs", "Baking Soda", "Spatula", "Bowl", "Butter", "Bread"};
@@ -52,6 +53,7 @@ public class main_menu<isAdmin> extends AppCompatActivity {
         String[] itemArrayType = {"Cake", "Cake", "Biscuit", "Cookie", "Other", "Ingredient", "Ingredient", "Ingredient", "Ingredient", "Ingredient", "Cake", "Ingredient", "Cookie", "Ingredient", "Ingredient", "Ingredient", "Other", "Other", "Ingredient", "Ingredient",};
 
         //check to see if button is visible or not
+        //Calls the isAdmin boolean to see whether or not the user has administrative properties
         if (isAdmin == false)
         {
             isAdminButton.setVisibility(View.INVISIBLE);
@@ -92,6 +94,9 @@ public class main_menu<isAdmin> extends AppCompatActivity {
         });
 
         //Clear inventory
+        /*In Future maintenance have a screen for selecting individual items
+         *to be deleted from the inventory instead of all
+         */
         clearInvButton.setOnClickListener(new View.OnClickListener()
         {
             @Override

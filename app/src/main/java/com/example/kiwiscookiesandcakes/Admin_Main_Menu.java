@@ -55,7 +55,12 @@ public class Admin_Main_Menu extends AppCompatActivity {
             }
         });
 
-        //inventory status navigation
+        /* In future maintenance, having a dynamically animation
+         * of when the button is pressed showing up with all the menus
+         * navigation options so that it minimises the user going from screen to screen
+         */
+
+        //Normal user menu navigation
         toUsermenuButton.setOnClickListener(new View.OnClickListener()
         {
             @Override

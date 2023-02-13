@@ -50,6 +50,10 @@ public class Admin_Remove_Users<userLog> extends AppCompatActivity {
         //Button to go to View Users
         Button viewUsersNavButton = findViewById(R.id.viewUsersFromRemoveUsers);
 
+        /* Future maintenance should have a current users' view
+         * just off to the side so that the admin doesn't have to go back
+         * and forth seeing the users
+         */
 
         //Removal of user check and confirm
         removeUserButton.setOnClickListener(new View.OnClickListener()

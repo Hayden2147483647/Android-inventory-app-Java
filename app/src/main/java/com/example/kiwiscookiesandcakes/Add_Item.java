@@ -48,7 +48,9 @@ public class Add_Item extends AppCompatActivity {
         //New inventory class object for inserting an item
         Inventory newItem = new Inventory();
 
-        biscuitRadioInput.isChecked(); //returns true or false
+        /* In Future maintenance, having a check condition for if an item is already in the database.
+         * If an item is in the database, an option should show up saying if they wish to modify it
+         */
 
 
         //Adding in item while checking from all the input types

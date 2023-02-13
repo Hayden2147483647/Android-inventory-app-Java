@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     public static Boolean isAdmin = false;
 
     //Hashmap data structure for user logins
+    //This is used in other screens to check whether a user with a username is already in the system
     public static HashMap<String, String> userLog = new HashMap<>();
 
 
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity
                             break;
                         }
                         //Username and password match admin login details and takes the user to the admin page
+                        //In future maintenance having a simple secured text file or other file to store Admin logins rather than in code
                         else if (usernameInput.getText().toString().equals("Admin") && passwordInput.getText().toString().equals("CookieManagement84"))
                         {
                             Intent adminSignIn = new Intent(getApplicationContext(), Admin_Main_Menu.class);
@@ -130,6 +132,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /* In future maintenance, having a email input would be beneficial
+     * so that if the user forgets their login information
+     * They can simply push a button to send a email to reset their password.
+     * This would require a online database to be accessed
+     */
 
 
     //pop up message saying to the user that at least one input is blank
