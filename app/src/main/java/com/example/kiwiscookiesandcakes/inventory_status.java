@@ -85,7 +85,18 @@ public class inventory_status extends AppCompatActivity {
                 displayString[0] = "";
 
                 pageNum[0]--;
-                //TODO set a "For" loop for the previous button
+                //Sets the next button to be enabled when previous has been pressed
+                nextButton.setEnabled(true);
+                nextButton.setClickable(true);
+                for (int p = ((5 * pageNum[0])-5); p < (5 * pageNum[0]); p++)
+                {
+                    //Format for the display text
+                    labelString[0] += "Item:\nQuantity:\nType:\n\n";
+                    displayString[0] += itemNameArray[p] + "\n" + itemQuantityArray[p] + "\n" + itemTypeArray[p] + "\n\n";
+                    //Setting the text view of both the label and display to the string values above
+                    itemLabelView.setText(labelString[0]);
+                    itemDisplayView.setText(displayString[0]);
+                }
                 //disables the button when it it on the first page
                 if (pageNum[0] <= 1)
                 {
@@ -107,26 +118,40 @@ public class inventory_status extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                //Sets the previous to be enabled when clicking next
+                previousButton.setEnabled(true);
+                previousButton.setClickable(true);
                 //Resets the strings that will be used to set the textviews' text
                 labelString[0] = "";
                 displayString[0] = "";
 
                 pageNum[0]++;
-                for (int n = ((5*pageNum[0])-4); n < (5 * pageNum[0]); n++)
+                for (int n = ((5*pageNum[0])-4); n <= (5 * pageNum[0]); n++)
                 {
-                    //Format for the display text
-                    labelString[0] += "Item:\nQuantity:\nType:\n\n";
-                    displayString[0] += itemNameArray[n] + "\n" + itemQuantityArray[n] + "\n" + itemTypeArray[n] + "\n\n";
-                    //Setting the text view of both the label and display to the string values above
-                    itemLabelView.setText(labelString[0]);
-                    itemDisplayView.setText(displayString[0]);
+                    //Disables the button when it is on its last page
+                    if ((pageNum[0] * 5) >= allInvList.size())
+                    {
+                        nextButton.setEnabled(false);
+                        nextButton.setClickable(false);
+                    }
+                    else if (itemNameArray[n].isEmpty())
+                    {
+                        labelString[0] += "";
+                        displayString[0] += "";
+                        itemLabelView.setText(labelString[0]);
+                        itemDisplayView.setText(displayString[0]);
+                    }
+                    else
+                    {
+                        //Format for the display text
+                        labelString[0] += "Item:\nQuantity:\nType:\n\n";
+                        displayString[0] += itemNameArray[n] + "\n" + itemQuantityArray[n] + "\n" + itemTypeArray[n] + "\n\n";
+                        //Setting the text view of both the label and display to the string values above
+                        itemLabelView.setText(labelString[0]);
+                        itemDisplayView.setText(displayString[0]);
+                    }
                 }
-                //Disables the button when it is on its last page
-                if ((pageNum[0] * 5) >= allInvList.size())
-                {
-                    nextButton.setEnabled(false);
-                    nextButton.setClickable(false);
-                }
+
             }
         });
 
