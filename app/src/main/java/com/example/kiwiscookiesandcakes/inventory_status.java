@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class inventory_status extends AppCompatActivity {
 
     //Inventory Status database
@@ -22,18 +25,110 @@ public class inventory_status extends AppCompatActivity {
         //Initialise the database
         inventoryStat = Room.databaseBuilder(getApplicationContext(), InventoryStatDB.class, "inventoryStatdb").allowMainThreadQueries().build();
 
+        //List to get all the inventory from the database
+        List<Inventory> allInvList = inventoryStat.dao().getAllInventory();
+
         //Button to go back to the main menu
         Button mainMenuButton = findViewById(R.id.mainMenufromInvStat);
 
         //Text views for both item labels and its display
         TextView itemLabelView = findViewById(R.id.itemsLabelsTextView);
         TextView itemDisplayView = findViewById(R.id.itemsDisplayTextView);
+        //String to set the text of the display and label of the textviews
+        final String[] labelString = {""};
+        final String[] displayString = {""};
 
         //Buttons previous and next
         Button previousButton = findViewById(R.id.previousButton);
         Button nextButton = findViewById(R.id.nextButton);
+        
+        //String and int array to store list item labels
+        String[] itemNameArray = new String[allInvList.size()];
+        int[] itemQuantityArray = new int[allInvList.size()];
+        String[] itemTypeArray = new String[allInvList.size()];
+
+        //Integer for the "for" loops
+        int x = 0;
+
+            //"for" loop to only display the first five items
+            for (Inventory inv : allInvList)
+            {
+                //Format for the label text
+                //Getting item name, quantity and types and adding it to the arrays
+                itemNameArray[x] = inv.getItemname();
+                itemQuantityArray[x] = inv.getQuantity();
+                itemTypeArray[x] = inv.getItemtype();
+                x++;
+            }
+            for (int j = 0; j < 5; j++)
+            {
+                //Format for the display text
+                labelString[0] += "Item:\nQuantity:\nType:\n\n";
+                displayString[0] += itemNameArray[j] + "\n" + itemQuantityArray[j] + "\n" + itemTypeArray[j] + "\n\n";
+                //Setting the text view of both the label and display to the string values above
+                itemLabelView.setText(labelString[0]);
+                itemDisplayView.setText(displayString[0]);
+            }
 
 
+        //integer for page number for previous and next buttons
+        final int[] pageNum = {1};
+
+        //Previous Button
+        previousButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Resets the strings that will be used to set the textviews' text
+                labelString[0] = "";
+                displayString[0] = "";
+
+                pageNum[0]--;
+                //TODO set a "For" loop for the previous button
+                //disables the button when it it on the first page
+                if (pageNum[0] <= 1)
+                {
+                    previousButton.setEnabled(false);
+                    previousButton.setClickable(false);
+                }
+                //Makes the button enabled when not on page one
+                else
+                {
+                    previousButton.setEnabled(true);
+                    previousButton.setClickable(true);
+                }
+            }
+        });
+
+        //Next button
+        nextButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Resets the strings that will be used to set the textviews' text
+                labelString[0] = "";
+                displayString[0] = "";
+
+                pageNum[0]++;
+                for (int n = ((5*pageNum[0])-4); n < (5 * pageNum[0]); n++)
+                {
+                    //Format for the display text
+                    labelString[0] += "Item:\nQuantity:\nType:\n\n";
+                    displayString[0] += itemNameArray[n] + "\n" + itemQuantityArray[n] + "\n" + itemTypeArray[n] + "\n\n";
+                    //Setting the text view of both the label and display to the string values above
+                    itemLabelView.setText(labelString[0]);
+                    itemDisplayView.setText(displayString[0]);
+                }
+                //Disables the button when it is on its last page
+                if ((pageNum[0] * 5) >= allInvList.size())
+                {
+                    nextButton.setEnabled(false);
+                    nextButton.setClickable(false);
+                }
+            }
+        });
 
         //return to main menu
         mainMenuButton.setOnClickListener(new View.OnClickListener()

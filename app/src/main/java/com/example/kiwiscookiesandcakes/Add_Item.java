@@ -1,8 +1,10 @@
 package com.example.kiwiscookiesandcakes;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -43,8 +45,10 @@ public class Add_Item extends AppCompatActivity {
         //Button to go to the inventory status
         Button invStatButton = findViewById(R.id.inventoryStatFromAddButton);
 
-        //biscuitRadioInput.isChecked() returns true or false
-        //biscuitRadioInput.isActivated() returns true or false
+        //New inventory class object for inserting an item
+        Inventory newItem = new Inventory();
+
+        biscuitRadioInput.isChecked(); //returns true or false
 
 
         //Adding in item while checking from all the input types
@@ -53,6 +57,7 @@ public class Add_Item extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                String typeString = "";
                 //Checking that inputs are not empty
                 if (itemNameInput.length() == 0 || itemQuantityInput.length() == 0)
                 {
@@ -63,7 +68,42 @@ public class Add_Item extends AppCompatActivity {
                 {
                     Toast.makeText(getBaseContext(), "Quantity cannot be less than zero", Toast.LENGTH_SHORT).show();
                 }
-                //TODO Add in checking from inputs and inserting into the inventory database
+                else
+                {
+                    //Setting the type string to which ever radio button is pressed
+                    if (biscuitRadioInput.isChecked())
+                    {
+                        typeString = "Biscuit";
+                    }
+                    else if (cookieRadioInput.isChecked())
+                    {
+                        typeString = "Cookie";
+                    }
+                    else if (cakeRadioInput.isChecked())
+                    {
+                        typeString = "Cake";
+                    }
+                    else if (ingredientRadioInput.isChecked())
+                    {
+                        typeString = "Ingredient";
+                    }
+                    else
+                    {
+                        typeString = "Other";
+                    }
+                    //code for putting item in database here
+                    //Setting item name, quantity and type to inventory object
+                    newItem.setItemname(itemNameInput.getText().toString());
+                    newItem.setQuantity(Integer.parseInt(itemQuantityInput.getText().toString()));
+                    newItem.setItemtype(typeString);
+                    //adding item into inventory
+                    inventoryStat.dao().addInventory(newItem);
+                    //pop up for the success of item input
+                    itemSuccess();
+                    //Clears the input fields
+                    itemNameInput.setText("");
+                    itemQuantityInput.setText("");
+                }
             }
         });
 
@@ -88,5 +128,22 @@ public class Add_Item extends AppCompatActivity {
                 startActivity(mainMenu);
             }
         });
+    }
+
+    private void itemSuccess()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Add_Item.this);
+        builder.setMessage("Item added successfully!");
+
+        builder.setPositiveButton("Dismiss", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

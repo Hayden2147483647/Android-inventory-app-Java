@@ -24,10 +24,10 @@
         android:id="@+id/itemsLabelsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="TextView"
+        android:layout_marginTop="88dp"
+        android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/itemsDisplayTextView"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,9 +35,9 @@
         android:id="@+id/itemsDisplayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:text="TextView"
+        android:layout_marginEnd="92dp"
+        android:layout_marginRight="92dp"
+        android:textSize="10sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/itemsLabelsTextView"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -47,6 +47,7 @@
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:enabled="false"
         android:text="@string/previous"
         app:layout_constraintBaseline_toBaselineOf="@+id/nextButton"
         app:layout_constraintStart_toStartOf="parent" />
