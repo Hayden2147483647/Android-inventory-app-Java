@@ -60,6 +60,10 @@ public class MainActivity extends AppCompatActivity
         //Button to sign in
         final Button signinButton = findViewById(R.id.signinButton);
 
+        //String from user database for checking inputs
+        final String[] userString = new String[1];
+        final String[] passString = new String[1];
+
         //sign in verification
         signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +73,10 @@ public class MainActivity extends AppCompatActivity
                 {
                     for (String x : userLog.keySet())
                     {
-                        String userString = x;
-                        String passString = userLog.get(x);
+                        userString[0] = x;
+                        passString[0] = userLog.get(x);
                         //Username and password matches up with the hashmap values and logs user in
-                        if (usernameInput.getText().toString().equals(userString) && passwordInput.getText().toString().equals(passString))
+                        if (usernameInput.getText().toString().equals(userString[0]) && passwordInput.getText().toString().equals(passString[0]))
                         {
                             Intent userSignIn = new Intent(getApplicationContext(), main_menu.class);
                             startActivity(userSignIn);
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity
                     startActivity(adminSignIn);
                     isAdmin = true;
                 }
-                else
+                else if (!usernameInput.getText().toString().equals(userString[0]) || !passwordInput.getText().toString().equals(passString[0]))
                 {
                     //pop up for if both inputs are not blank and isn't a user login
                     Toast.makeText(getBaseContext(), "Username and Password is not a login.\nIf you have forgotten you login, please contact the customer support team\nElse, create a new account", Toast.LENGTH_LONG).show();

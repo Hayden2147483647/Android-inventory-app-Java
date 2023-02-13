@@ -50,6 +50,9 @@ public class inventory_status extends AppCompatActivity {
         //Integer for the "for" loops
         int x = 0;
 
+        //Integer for page number for previous and next buttons
+        final int[] pageNum = {1};
+
             //"for" loop to only display the first five items
             for (Inventory inv : allInvList)
             {
@@ -62,17 +65,33 @@ public class inventory_status extends AppCompatActivity {
             }
             for (int j = 0; j < 5; j++)
             {
-                //Format for the display text
-                labelString[0] += "Item:\nQuantity:\nType:\n\n";
-                displayString[0] += itemNameArray[j] + "\n" + itemQuantityArray[j] + "\n" + itemTypeArray[j] + "\n\n";
-                //Setting the text view of both the label and display to the string values above
+                //Disables the button when it is on its last page
+                if ((pageNum[0] * 5) >= allInvList.size())
+                {
+                    nextButton.setEnabled(false);
+                    nextButton.setClickable(false);
+                }
+                //if array extends  % 5 then it should display the rest
+                if (j >= itemNameArray.length)
+                {
+                    labelString[0] += "\n\n\n\n";
+                    displayString[0] += "\n\n\n\n";
+                    break;
+                }
+                else
+                {
+                    //Format for the display text
+                    labelString[0] += "Item:\nQuantity:\nType:\n\n";
+                    displayString[0] += itemNameArray[j] + "\n" + itemQuantityArray[j] + "\n" + itemTypeArray[j] + "\n\n";
+                    //Setting the text view of both the label and display to the string values above
+                    itemLabelView.setText(labelString[0]);
+                    itemDisplayView.setText(displayString[0]);
+                }
                 itemLabelView.setText(labelString[0]);
                 itemDisplayView.setText(displayString[0]);
+
             }
 
-
-        //integer for page number for previous and next buttons
-        final int[] pageNum = {1};
 
         //Previous Button
         previousButton.setOnClickListener(new View.OnClickListener()
@@ -90,25 +109,37 @@ public class inventory_status extends AppCompatActivity {
                 nextButton.setClickable(true);
                 for (int p = ((5 * pageNum[0])-5); p < (5 * pageNum[0]); p++)
                 {
-                    //Format for the display text
-                    labelString[0] += "Item:\nQuantity:\nType:\n\n";
-                    displayString[0] += itemNameArray[p] + "\n" + itemQuantityArray[p] + "\n" + itemTypeArray[p] + "\n\n";
-                    //Setting the text view of both the label and display to the string values above
+                    //if array extends  % 5 then it should display the rest
+                    if (p >= itemNameArray.length)
+                    {
+                        labelString[0] += "\n\n\n\n";
+                        displayString[0] += "\n\n\n\n";
+                    }
+                    else
+                    {
+                        //Format for the display text
+                        labelString[0] += "Item:\nQuantity:\nType:\n\n";
+                        displayString[0] += itemNameArray[p] + "\n" + itemQuantityArray[p] + "\n" + itemTypeArray[p] + "\n\n";
+                        //Setting the text view of both the label and display to the string values above
+                        itemLabelView.setText(labelString[0]);
+                        itemDisplayView.setText(displayString[0]);
+                    }
                     itemLabelView.setText(labelString[0]);
                     itemDisplayView.setText(displayString[0]);
+                    //disables the button when it it on the first page
+                    if (pageNum[0] <= 1)
+                    {
+                        previousButton.setEnabled(false);
+                        previousButton.setClickable(false);
+                    }
+                    //Makes the button enabled when not on page one
+                    else
+                    {
+                        previousButton.setEnabled(true);
+                        previousButton.setClickable(true);
+                    }
                 }
-                //disables the button when it it on the first page
-                if (pageNum[0] <= 1)
-                {
-                    previousButton.setEnabled(false);
-                    previousButton.setClickable(false);
-                }
-                //Makes the button enabled when not on page one
-                else
-                {
-                    previousButton.setEnabled(true);
-                    previousButton.setClickable(true);
-                }
+
             }
         });
 
@@ -128,18 +159,11 @@ public class inventory_status extends AppCompatActivity {
                 pageNum[0]++;
                 for (int n = ((5*pageNum[0])-4); n <= (5 * pageNum[0]); n++)
                 {
-                    //Disables the button when it is on its last page
-                    if ((pageNum[0] * 5) >= allInvList.size())
+                    //if array extends  % 5 then it should display the rest
+                    if (n >= itemNameArray.length)
                     {
-                        nextButton.setEnabled(false);
-                        nextButton.setClickable(false);
-                    }
-                    else if (itemNameArray[n].isEmpty())
-                    {
-                        labelString[0] += "";
-                        displayString[0] += "";
-                        itemLabelView.setText(labelString[0]);
-                        itemDisplayView.setText(displayString[0]);
+                        labelString[0] += "\n\n\n\n";
+                        displayString[0] += "\n\n\n\n";
                     }
                     else
                     {
@@ -149,6 +173,14 @@ public class inventory_status extends AppCompatActivity {
                         //Setting the text view of both the label and display to the string values above
                         itemLabelView.setText(labelString[0]);
                         itemDisplayView.setText(displayString[0]);
+                    }
+                    itemLabelView.setText(labelString[0]);
+                    itemDisplayView.setText(displayString[0]);
+                    //Disables the button when it is on its last page
+                    if ((pageNum[0] * 5) >= allInvList.size())
+                    {
+                        nextButton.setEnabled(false);
+                        nextButton.setClickable(false);
                     }
                 }
 

@@ -145,7 +145,7 @@ public class main_menu<isAdmin> extends AppCompatActivity {
             {
                 inventoryStat.dao().deleteAllInventory();
                 dialog.dismiss();
-                Toast.makeText(getBaseContext(), "Inventory Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Inventory Deleted", Toast.LENGTH_LONG).show();
             }
         });
 
